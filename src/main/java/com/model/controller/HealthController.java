@@ -4,6 +4,7 @@ import cn.hutool.db.Entity;
 import com.model.servce.HealthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,12 @@ public class HealthController {
         return service.show(map);
     }
 
+    @RequestMapping("index")
+    public ModelAndView index(ModelAndView view){
+        view.setViewName("index");
+        view.addObject("name","test");
+        return view;
+    }
 
 
 
