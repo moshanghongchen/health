@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
+import com.model.echars.Options;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -49,7 +50,7 @@ public class HealthService {
         //获取时间
         Date now=new Date();
 
-        Entity entity = new Entity().create(TABLE_NAME).set(NAME, name).set(WEIGHT, weight).set(INSERT_DATE, now);
+        Entity entity = Entity.create(TABLE_NAME).set(NAME, name).set(WEIGHT, weight).set(INSERT_DATE, now);
         int insert=0;
         try {
             insert=Db.use().insert(entity);
@@ -61,13 +62,12 @@ public class HealthService {
 
     public List<Entity> show(Map<String,String > req){
         List<Entity> res=null;
-        Entity entity = new Entity().create(TABLE_NAME);
         //获取时间范围
         String queryType = req.get("queryType");
         Date startTime = getStartTime(queryType);
         try {
             if (startTime==null){
-                res=Db.use().find(entity);
+                res=Db.use().query("select * from ? where name= ? orderBy insertDate",TABLE_NAME);
             }else {
                 res=Db.use().query("select * from ? where insertDate between ? and ?",TABLE_NAME,startTime,new Date());
             }
@@ -95,7 +95,9 @@ public class HealthService {
 
 
 
-
+//    public Options getOption(List<Entity> list){
+//
+//    }
 
 
 
