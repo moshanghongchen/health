@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>salary1</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<table class="table table-striped table-bordered table-responsive table-hover">
+    <thead>
+        <tr th:utext="${head}">
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="list2:${data}">
+            <td th:text="${list2.id}"/>
+            <td th:text="${list2.total_salary}"/>
+            <td class="success" th:text="${list2.real_salary}"/>
+            <td th:if="${list2.pre_tax_add}!=-1" th:text="${list2.pre_tax_add}"></td>
+            <td th:if="${list2.pre_tax_reduce}!=-1"	th:text="${list2.pre_tax_reduce}"/>
+            <td th:if="${list2.kaoqin_reduce}!=-1"	th:text="${list2.kaoqin_reduce}"/>
+            <td th:if="${list2.shebao_reduce}!=-1"	th:text="${list2.shebao_reduce}"/>
+            <td th:if="${list2.pre_reduce}!=-1"	th:text="${list2.pre_reduce}"/>
+            <td th:if="${list2.after_tax_add}!=-1"	th:text="${list2.after_tax_add}"/>
+            <td th:if="${list2.after_tax_reduce}!=-1"	th:text="${list2.after_tax_reduce}"/>        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
